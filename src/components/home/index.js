@@ -27,7 +27,7 @@ const Home = () => {
               </div>
               <div className="col-2">
                 <a className={`btn btn-primary rounded-pill fa-pull-right
-                                fw-bold ps-4 pe-4`} href="#">
+                                fw-bold ps-4 pe-4`} href="/">
                   Tuit
                 </a>
               </div>
