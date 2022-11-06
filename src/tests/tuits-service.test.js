@@ -90,58 +90,48 @@ describe('can retrieve a tuit by their primary key with REST API', () => {
     expect(existingTuit.postedOn).toEqual("2022-12-06T00:00:00.000Z");
   });
 
-
 });
 
+
+
 describe('can retrieve all tuits with REST API', () => {
-  // TODO: implement this
-
-  const tuits = [
-      "When InSight — a shortening of Interior Exploration using Seismic Investigations",
-       "In early February, Dr. Posiolova and other scientists were working to take a three-dimensional, stereo image of a part of Mars",
-       "It was so big that it was visible in daily global weather images taken by another camera on the orbiter"
-    ];
-
-  const ripley = {
+    const tuitTexts = ['Germany’s Team NimbRo took home the $5 million grand prize in the ANA Avatar XPrize',
+    'Virgin Galactic’s second suborbital spaceplane won’t enter service in 2023',
+    'NASA has restored plans to include a lunar landing on its Artemis 4 mission'];
+    const tuitIds = [];
+    const ripley = {
         username: 'ellenripley',
         password: 'lv426',
         email: 'ellenripley@aliens.com'
     };
-    const newUser = createUser(ripley);
-    const userId = newUser._id;
-    beforeAll(async() =>
+    const currDate = new Date("2022-11-02T11:48:48.360Z");
+    let userId, newUser, tuit;
 
-      tuits.map(tuit =>
-        createTuit({
-          tuit,
-          postedOn: '2022-11-26'
-        })
-      )
+    beforeEach(async () => {
+        newUser = await createUser(ripley);
+        userId = newUser._id;
 
-    );
+        for (const text of tuitTexts) {
+            let newTuit = {
+                tuit: text,
+                postedOn: currDate,
+                postedBy: newUser,
+            };
+            tuit = await createTuit(userId, newTuit);
+            tuitIds.push(tuit._id);
+        }
+    });
 
-    afterAll(async() =>
-      tuits.map(tuit =>
-        deleteTuit(tuit._id)
-      ),
-      deleteUsersByUsername(ripley.username),
-    );
+    afterEach(async () => {
+        for (const id of tuitIds) {
+            return deleteTuit(id);
+        }
+        await deleteUsersByUsername(ripley.username);
+    });
 
-    test('retrieve all tuits from REST API', async () => {
-      const listOfTuits = await findAllUsers();
-
-      expect(listOfTuits.length)
-        .toBeGreaterThanOrEqual(tuits.length);
-
-      const tuitsWeInserted = listOfTuits.filter(
-        tuit => tuits.indexOf(listOfTuits.tuit) >= 0);
-
-      tuitsWeInserted.forEach(tuit => {
-        const tuitName = tuits
-          .find(tuit => tuit === listOfTuits.tuit);
-        expect(listOfTuits.tuit).toEqual(tuit);
-        expect(listOfTuits.postedOn)
-          .toEqual("2022-12-06T00:00:00.000Z");
-      });
+    test('can retrieve all tuits with REST API', async () => {
+        const tuitResponse = await findAllTuits();
+        const textsRetreived = tuitResponse.map(tuit => tuit);
+        expect(textsRetreived).toEqual(tuitResponse)
     });
 });
