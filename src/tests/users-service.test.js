@@ -13,7 +13,7 @@ describe('createUser', () => {
   };
 
   // setup test before running test
-  beforeAll(async() => {
+  beforeAll(() => {
     // remove any/all users to make sure we create it in the test
     console.log(deleteUsersByUsername(ripley.username));
     return deleteUsersByUsername(ripley.username);
