@@ -9,6 +9,7 @@ import './tuiter.css'
 import EditProfile from "../profile/edit-profile";
 import MyTuits from "../profile/my-tuits.js";
 import MyLikes from "../profile/my-likes.js";
+import MyDislikes from "../profile/my-dislikes.js";
 import Explore from "../explore";
 
 import Notifications from "../notifications";
@@ -18,6 +19,7 @@ import More from "../more";
 import {Login} from "../profile/login";
 import Movies from "../movies";
 import MovieDetails from "../movies/details";
+import Signup from "../profile/signup";
 
 function Tuiter () {
   return(
@@ -31,9 +33,10 @@ function Tuiter () {
             <Routes>
               <Route path="/" element={<Home/>}/>
               <Route path="/login" element={<Login/>}/>
+              <Route path='/signup' element={<Signup/>}></Route>
               <Route path="/tuiter" element={<Home/>}/>
               <Route path="/tuiter/:uid" element={<Home/>}/>
-              <Route path="/home" element={<MyTuits/>}/>
+              <Route path="/home" element={<Home/>}/>
               <Route path="/home/:uid" element={<Home/>}/>
               <Route path="/explore" element={<Explore/>}/>
               <Route path="/notifications" element={<Notifications/>}/>
@@ -44,6 +47,7 @@ function Tuiter () {
               <Route path="/profile/edit" element={<EditProfile/>}/>
               <Route path="/profile/mytuits" element={<MyTuits/>}/>
               <Route path="/profile/mylikes" element={<MyLikes/>}/>
+              <Route path="/profile/mydislikes" element={<MyDislikes/>}/>
               <Route path="/movies" element={<Movies/>}/>
               <Route path="/movies/:imdbID" element={<MovieDetails/>}/>
               <Route path="/more" element={<More/>}/>

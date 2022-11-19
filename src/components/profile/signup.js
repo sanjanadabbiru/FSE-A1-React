@@ -1,9 +1,9 @@
 import {useState} from "react";
-import * as service from "../../services/auth-service";
-
+import * as service
+         from "../../services/auth-service";
 import {useNavigate} from "react-router-dom";
 
-const Signup = () => {
+export const Signup = () => {
   const [newUser, setNewUser] = useState({});
   const navigate = useNavigate();
   const signup = () =>
@@ -13,17 +13,23 @@ const Signup = () => {
   return (
     <div>
       <h1>Signup</h1>
-      <input onChange={(e) =>
+      <div className="mt-2 ">
+      <input placeholder="username" onChange={(e) =>
         setNewUser({...newUser,
           username: e.target.value})}/>
-      <input onChange={(e) =>
+      </div>
+      <div className="mt-2">
+        <input placeholder="password" onChange={(e) =>
         setNewUser({...newUser,
           password: e.target.value})}/>
-      <input onChange={(e) =>
-        setNewUser({...newUser,
-          email: e.target.value})}/>
-      <button onClick={signup}>
-        Signup</button>
+      </div>
+      <div className="mt-2">
+        <input placeholder="email" onChange={(e) =>
+          setNewUser({...newUser,
+            email: e.target.value})}/>
+      </div>
+        <button onClick={signup} className="mt-2 float-start btn btn-warning rounded-pill">
+          Signup</button>
     </div>
   );
 }
