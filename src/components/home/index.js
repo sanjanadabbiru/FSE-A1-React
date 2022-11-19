@@ -21,7 +21,7 @@ const Home = () => {
   }
   useEffect(() => {
     let isMounted = true;
-    findTuits()
+findTuits()
     return () => {isMounted = false;}
   }, []);
   const createTuit = () =>

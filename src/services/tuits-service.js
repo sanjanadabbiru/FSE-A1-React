@@ -27,7 +27,7 @@ export const createTuit = (uid, tuit) =>
     .then(response => response.data);
 
 export const updateTuit = (tid, tuit) =>
-  api.post(`${TUITS_API}/${tid}`, tuit)
+  api.put(`${TUITS_API}/${tid}`, tuit)
     .then(response => response.data);
 
 export const deleteTuit = (tid) =>

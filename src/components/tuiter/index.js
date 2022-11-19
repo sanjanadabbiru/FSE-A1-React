@@ -7,10 +7,12 @@ import Bookmarks from "../bookmarks";
 import Profile from "../profile";
 import './tuiter.css'
 import EditProfile from "../profile/edit-profile";
+import MyTuits from "../profile/my-tuits.js";
+import MyLikes from "../profile/my-likes.js";
 import Explore from "../explore";
+
 import Notifications from "../notifications";
 import Messages from "../messages";
-import MyTuits from "../profile/my-tuits";
 import Lists from "../lists";
 import More from "../more";
 import {Login} from "../profile/login";
@@ -38,8 +40,10 @@ function Tuiter () {
               <Route path="/messages" element={<Messages/>}/>
               <Route path="/bookmarks" element={<Bookmarks/>}/>
               <Route path="/lists" element={<Lists/>}/>
-              <Route path="/profile" element={<Profile/>}/>
+              <Route path="/profile/*" element={<Profile/>}/>
               <Route path="/profile/edit" element={<EditProfile/>}/>
+              <Route path="/profile/mytuits" element={<MyTuits/>}/>
+              <Route path="/profile/mylikes" element={<MyLikes/>}/>
               <Route path="/movies" element={<Movies/>}/>
               <Route path="/movies/:imdbID" element={<MovieDetails/>}/>
               <Route path="/more" element={<More/>}/>
