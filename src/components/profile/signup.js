@@ -28,7 +28,7 @@ export const Signup = () => {
           setNewUser({...newUser,
             email: e.target.value})}/>
       </div>
-        <button onClick={signup} className="mt-2 float-start btn btn-warning rounded-pill">
+        <button onClick={signup} className="mt-2 float-start btn rounded-pill">
           Signup</button>
     </div>
   );

@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import * as likesService from "../../services/likes-service";
+import * as dislikesService from "../../services/dislikes-service";
+import clsx from "clsx";
+
 
 const TuitStats = ({tuit, likeTuit, dislikeTuit}) => {
+
+
+const [likedTuit, setLikedTuit] = useState(false);
+  const [dislikedTuit, setDislikedTuit] = useState(false);
+
+  useEffect(() => {
+    const fetchLikesAndDislikes = () => {
+      likesService.userLikedTheTuit("me", tuit._id).then((liked) => {
+        setLikedTuit(liked);
+      });
+      dislikesService
+        .userDislikedTheTuit("me", tuit._id)
+        .then((disliked) => {
+          setDislikedTuit(disliked);
+        });
+    };
+
+    fetchLikesAndDislikes();
+  }, [tuit]);
+
     return (
       <div className="row mt-2">
         <div className="col">
@@ -15,10 +39,14 @@ const TuitStats = ({tuit, likeTuit, dislikeTuit}) => {
           <span onClick={() => likeTuit(tuit)}>
               {
                 tuit.stats && tuit.stats.likes && tuit.stats.likes > 0 ? (
-                  <i className="fa-solid fa-thumbs-up"
-                               style={{color: 'blue'}}></i>
+                          <i
+                            className={clsx("fa-solid", "fa-thumbs-up", "me-1", {
+                              "ttr-like-unlike-color-blue": likedTuit,
+                            })}
+                          ></i>
                 ) : (
                   <i className="far fa-thumbs-up"></i>
+
                 )
                 }
 
@@ -31,8 +59,11 @@ const TuitStats = ({tuit, likeTuit, dislikeTuit}) => {
          <span onClick={() => dislikeTuit(tuit)}>
                      {
                          tuit.stats && tuit.stats.dislikes && tuit.stats.dislikes > 0 ? (
-                           <i className="fa-solid fa-thumbs-down"
-                                        style={{color: 'red'}}></i>
+                           <i
+                                     className={clsx("fa-solid", "fa-thumbs-down", "me-1", {
+                                       "ttr-like-unlike-color-red": dislikedTuit,
+                                     })}
+                                   ></i>
                          ) : (
                            <i className="far fa-thumbs-down"></i>
                          )

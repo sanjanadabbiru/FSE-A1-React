@@ -8,7 +8,6 @@ const MyTuits = () => {
     {
         service.findTuitsByUser("me")
             .then(tuits => setTuits(tuits));
-
     }
     useEffect(findMyTuits, []);
     return(
@@ -17,7 +16,7 @@ const MyTuits = () => {
                 My Tuits
             </h1>
                 <Tuits tuits={tuits}
-               newTuits={findMyTuits}/>
+               refreshTuits={findMyTuits}/>
         </div>
 
     );
